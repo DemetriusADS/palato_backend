@@ -32,7 +32,7 @@ class LoteService
     public function list($filters = [])
     {
 
-        $lotes = Lote::where(function ($query) use (&$filters) {
+        $lotes = Lote::with(['picole'])->where(function ($query) use (&$filters) {
 
             if (isset($filters['nome']) && !empty($filters['nome']))
                 $query->where('nome', 'ilike', "%" . $filters['nome'] . "%");
@@ -52,6 +52,11 @@ class LoteService
     {
         $lote = Lote::find($id);
         $delete = $lote->delete();
+        if ($delete) {
+            $picole = Picole::find($lote['picole_id']);
+            $newQtdLotes = $picole['qtd_lotes'] - 1;
+            $picole->update(['qtd_lotes' => $newQtdLotes]);
+        }
         return $delete ? response("", 200) : response("", 500);
     }
 }

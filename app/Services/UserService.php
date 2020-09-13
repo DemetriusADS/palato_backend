@@ -21,7 +21,7 @@ class UserService
     public function list($filter = [])
     {
         if (empty($filter)) {
-            return response()->json(User::all());
+            return response()->json(User::with(['type'])->get());
         }
     }
     public function update($data, $id)

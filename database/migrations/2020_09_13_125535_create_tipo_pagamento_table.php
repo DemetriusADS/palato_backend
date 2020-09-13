@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypeTable extends Migration
+class CreateTipoPagamentoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreateTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('type', function (Blueprint $table) {
+        Schema::create('metodo_pagamento', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->timestamps();
         });
 
-        \DB::table('type')->insert([
-            ['name' => 'Administrador'],
-            ['name' => 'Financeiro'],
-            ['name' => 'Produção'],
-            ['name' => 'Vendedor'],
+        \DB::table('metodo_pagamento')->insert([
+            ['name' => 'dinheiro'],
+            ['name' => 'credito'],
+            ['name' => 'debito'],
+            ['name' => 'pendente'],
         ]);
     }
 
@@ -33,6 +34,6 @@ class CreateTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type');
+        Schema::dropIfExists('metodo_pagamento');
     }
 }

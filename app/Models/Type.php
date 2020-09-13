@@ -8,8 +8,8 @@ class Type extends Model
 {
     protected $table = 'type';
     protected $hidden = ['id'];
-    // public function user()
-    // {
-    //     return $this->belongsTo('App\User');
-    // }
+    public function user()
+    {
+        return $this->hasMany('App\User');
+    }
 }

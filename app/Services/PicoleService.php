@@ -22,11 +22,11 @@ class PicoleService
 
     public function list($filters = [])
     {
-        $picoles = Picole::where(function ($query) use (&$filters) {
+        $picoles = Picole::with(['lotes'])->where(function ($query) use (&$filters) {
 
             if (isset($filters['sabor']) && !empty($filters['sabor']))
                 $query->where('sabor', 'ilike', "%" . $filters['sabor'] . "%");
-        })->orderBy('id', 'desc')->paginate(10);
+        })->orderBy('sabor', 'desc')->paginate(10);
 
         return response()->json($picoles);
     }
