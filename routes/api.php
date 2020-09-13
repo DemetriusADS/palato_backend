@@ -26,3 +26,15 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', 'role:adminis
     Route::put('/{id}', 'Api\UserController@update');
     Route::delete('/{id}', 'Api\UserController@delete');
 });
+Route::group(['prefix' => 'picole', 'middleware' => ['auth:sanctum']], function () {
+    Route::post('/', ['uses' => 'Api\PicoleController@create', 'middleware' => ['role:administrador||financeiro']]);
+    Route::get('/', ['uses' => 'Api\PicoleController@list']);
+    Route::put('/{id}', 'Api\PicoleController@update');
+    Route::delete('/{id}', ['uses' => 'Api\PicoleController@delete', 'middleware' => ['role:administrador||financeiro']]);
+});
+Route::group(['prefix' => 'lote', 'middleware' => ['auth:sanctum']], function () {
+    Route::post('/', ['uses' => 'Api\LoteController@create', 'middleware' => ['role:administrador||financeiro||producao']]);
+    Route::get('/', ['uses' => 'Api\LoteController@list']);
+    Route::put('/{id}', 'Api\LoteController@update');
+    Route::delete('/{id}', ['uses' => 'Api\LoteController@delete', 'middleware' => ['role:administrador||financeiro||producao']]);
+});

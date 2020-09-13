@@ -15,7 +15,7 @@ class AddColumnTypeInUser extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->integer('type_id')->unsigned()->default(4);
-            $table->foreign('type_id')->references('id')->on('type')->onDelete('cascade');;
+            $table->foreign('type_id')->references('id')->on('type')->onDelete('cascade');
         });
     }
 

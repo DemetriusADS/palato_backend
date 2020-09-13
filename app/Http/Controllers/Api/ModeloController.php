@@ -16,16 +16,23 @@ class ModeloController extends Controller
         $this->modeloService = $modeloService;
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $modelo = $request->all();
+        return $this->modeloService->create($modelo);
     }
-    public function list()
+    public function list(Request $request)
     {
+        $modelo = $request->all();
+        return $this->modeloService->list($modelo);
     }
-    public function update()
+    public function update(Request $request, $id)
     {
+        $modelo = $request->all();
+        return $this->modeloService->update($modelo, $id);
     }
-    public function delete()
+    public function delete(Request $request, $id)
     {
+        return $this->modeloService->delete($id);
     }
 }
